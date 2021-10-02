@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+.coddle/
+*~
+/gen.make
+*.gen.hpp
+*.bmp
+/brekout
+*.blend1
+/make-gen/make-gen
