@@ -10,7 +10,7 @@
 #include <log/log.hpp>
 
 LoadingScreen::LoadingScreen(int n, sdl::Renderer &r, Audio &audio)
-  : n(n), audio(audio), r(r), canvas(r), t0(SDL_GetTicks()), bg(r.get(), LOAD_SPRITE(title_screen))
+  : n(n), audio(audio), r(r), canvas(r), t0(SDL_GetTicks()), bg(r.get(), n != 4 ? LOAD_SPRITE(title_screen) : LOAD_SPRITE(snekout))
 {
   LOG("Loading Screen:", n);
   e.quit = [&done = done](const SDL_QuitEvent &) { done = true; };
@@ -75,7 +75,5 @@ auto LoadingScreen::loopOnce() -> std::unique_ptr<Scene>
       newScene = std::make_unique<GamePlayScreen>(n - 1, r.get(), audio.get());
     break;
   }
-  if (n == 4)
-    world.newObj<Button>(r, LOAD_SPRITE(snekout), 0, 0, 1280, 720, []() {});
   return std::move(newScene);
 }

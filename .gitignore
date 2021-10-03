@@ -38,3 +38,6 @@
 /brekout
 *.blend1
 /make-gen/make-gen
+*.wasm
+*.js
+*.html

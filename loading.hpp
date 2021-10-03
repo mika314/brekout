@@ -2,6 +2,7 @@
 
 #include "obj.hpp"
 #include "sprite.hpp"
+#include <vector>
 
 namespace sdl
 {

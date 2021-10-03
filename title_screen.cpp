@@ -17,7 +17,7 @@ TitleScreen::TitleScreen(int n, sdl::Renderer &r, Audio &audio)
     r(r),
     canvas(r),
     t0(SDL_GetTicks()),
-    bg(r.get(), LOAD_SPRITE(title_screen)),
+    bg(r.get(), n != 9 ? LOAD_SPRITE(title_screen) : LOAD_SPRITE(snekout)),
     playButton([&]() -> Button & {
       switch (n)
       {
@@ -82,7 +82,6 @@ TitleScreen::TitleScreen(int n, sdl::Renderer &r, Audio &audio)
   case 8: world.newObj<Button>(r, LOAD_SPRITE(ver_2), ScreenWidth - 110, ScreenHeight - 90, 106, 80, []() {}); break;
   case 9:
     world.newObj<Button>(r, LOAD_SPRITE(ver_3), ScreenWidth - 110, ScreenHeight - 90, 106, 80, []() {});
-    world.newObj<Button>(r, LOAD_SPRITE(snekout), 0, 0, 1280, 720, []() {});
     break;
   }
 }

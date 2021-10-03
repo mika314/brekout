@@ -5,7 +5,7 @@ desktop: FORCE gen
 	play /usr/share/sounds/sound-icons/percussion-12.wav 2> /dev/null
 
 web: FORCE desktop
-	emcc -Wall -Wextra -std=c++20 -O3 -I.coddle/libs_src -s USE_SDL=2 -s TOTAL_MEMORY=19988480 -s ALLOW_MEMORY_GROWTH=1 `sed 's/.coddle\///g' .coddle/brekout.objs | sed 's/.cpp.o/.cpp/g'` -o brekout.html
+	emcc -Wall -Wextra -std=c++20 -O3 -I.coddle/libs_src -s USE_SDL=2 -s TOTAL_MEMORY=47316992 -s ALLOW_MEMORY_GROWTH=1 `sed 's/.coddle\///g' .coddle/brekout.objs | sed 's/.cpp.o/.cpp/g'` -o brekout.html
 	play /usr/share/sounds/sound-icons/percussion-12.wav 2> /dev/null
 
 gen: FORCE make-gen
