@@ -1,4 +1,4 @@
-#include "title_screen_5.hpp"
+#include "title_screen_6.hpp"
 #include "audio.hpp"
 #include "button.hpp"
 #include "canvas.hpp"
@@ -8,17 +8,17 @@
 #include "sprite.hpp"
 #include <log/log.hpp>
 
-TitleScreen5::TitleScreen5(sdl::Renderer &r, Audio &audio) : audio(audio), r(r), canvas(r), t0(SDL_GetTicks()), bg(r.get(), LOAD_SPRITE(title_screen))
+TitleScreen6::TitleScreen6(sdl::Renderer &r, Audio &audio) : audio(audio), r(r), canvas(r), t0(SDL_GetTicks()), bg(r.get(), LOAD_SPRITE(title_screen))
 {
   e.quit = [&done = done](const SDL_QuitEvent &) { done = true; };
-  world.newObj<Button>(r, LOAD_SPRITE(play_button), (ScreenWidth - 200) / 2, 450, 200, 100, [this, &r, &audio]() {
-    newScene = std::make_unique<LoadingScreen>(2, r, audio);
+  world.newObj<Button>(r, LOAD_SPRITE(issue_fixed_3), (ScreenWidth - 446) / 2, (ScreenHeight - 349) / 2, 446, 349, [this, &r, &audio]() {
+    newScene = std::make_unique<LoadingScreen>(3, r, audio);
   });
   world.regEvents(e);
-  world.newObj<Button>(r, LOAD_SPRITE(ver_r), ScreenWidth - 60, ScreenHeight - 90, 56, 80, []() {});
+  world.newObj<Button>(r, LOAD_SPRITE(ver_2), ScreenWidth - 110, ScreenHeight - 90, 106, 80, []() {});
 }
 
-auto TitleScreen5::loopOnce() -> std::unique_ptr<Scene>
+auto TitleScreen6::loopOnce() -> std::unique_ptr<Scene>
 {
   while (e.poll()) {}
   r.get().setDrawColor(0x00, 0x00, 0x00, 0xff);

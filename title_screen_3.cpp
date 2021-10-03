@@ -12,7 +12,7 @@ TitleScreen3::TitleScreen3(sdl::Renderer &r, Audio &audio) : audio(audio), r(r),
 {
   e.quit = [&done = done](const SDL_QuitEvent &) { done = true; };
   world.newObj<Button>(r, LOAD_SPRITE(play_button), (ScreenWidth - 200) / 2, 450, 200, 100, [this, &r, &audio]() {
-    newScene = std::make_unique<LoadingScreen>(r, audio);
+    newScene = std::make_unique<LoadingScreen>(1, r, audio);
   });
   world.regEvents(e);
   world.newObj<Button>(r, LOAD_SPRITE(ver_b), ScreenWidth - 60, ScreenHeight - 90, 56, 80, []() {});

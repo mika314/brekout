@@ -1,7 +1,9 @@
 #include "audio.hpp"
+#include "bite.wav.gen.hpp"
 #include "booting.wav.gen.hpp"
 #include "booting_short.wav.gen.hpp"
 #include "crash.wav.gen.hpp"
+#include "tick.wav.gen.hpp"
 
 Audio::Audio()
   : want([]() {

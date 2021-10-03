@@ -35,5 +35,7 @@ private:
 DEF_SND(crash);
 DEF_SND(booting);
 DEF_SND(booting_short);
+DEF_SND(tick);
+DEF_SND(bite);
 
 #undef DEF_SND

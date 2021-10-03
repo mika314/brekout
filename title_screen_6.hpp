@@ -12,22 +12,19 @@ namespace sdl
   class Renderer;
 }
 
-class LoadingScreen : public Scene
+class TitleScreen6 : public Scene
 {
 public:
-  LoadingScreen(int n, sdl::Renderer &, Audio &);
+  TitleScreen6(sdl::Renderer &, Audio &);
   auto loopOnce() -> std::unique_ptr<Scene>;
 
 private:
-  int n;
   sdl::EventHandler e;
   World world;
   std::reference_wrapper<Audio> audio;
   std::reference_wrapper<sdl::Renderer> r;
   Canvas canvas;
   uint32_t t0;
-  float wait = 0;
-  bool didShowDialog = false;
   sdl::Texture bg;
   std::unique_ptr<Scene> newScene = nullptr;
 };
