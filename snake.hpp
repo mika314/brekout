@@ -23,6 +23,7 @@ private:
   std::deque<Dir> snake;
   float acc = 0;
   Dir curDir = Dir::d;
+  Dir lastDir = Dir::d;
   int fruits = 0;
   float gameTime = 0.f;
   std::reference_wrapper<class Audio> audio;

@@ -45,6 +45,11 @@ auto Snake::draw(Canvas &c) -> void
   {
     x -= dx[static_cast<size_t>(snake[i])];
     y -= dy[static_cast<size_t>(snake[i])];
+
+    if (n >= 3 && x == headX && y == headY)
+    {
+      headX = -100;
+    }
     switch (static_cast<int>(snake[i]) + static_cast<int>(snake[i + 1]) * 4)
     {
     case 3 + 4 * 2:
@@ -90,8 +95,9 @@ auto Snake::tick(float dt) -> void
   {
     acc -= speed;
     snake.push_front(curDir);
+    lastDir = curDir;
     if (speed > 0.001f)
-      audio.get().PLAY(tick, .1f, 0);
+      audio.get().PLAY(tick, .02f, 0);
     if (fruits == 0)
       snake.pop_back();
     else
@@ -110,10 +116,20 @@ auto Snake::tick(float dt) -> void
 
 auto Snake::move(Dir val) -> void
 {
-  if ((val == Dir::r || val == Dir::l) && (curDir == Dir::r || curDir == Dir::l))
-    return;
-  if ((val == Dir::u || val == Dir::d) && (curDir == Dir::u || curDir == Dir::d))
-    return;
+  if (n >= 3)
+  {
+    if ((val == Dir::r || val == Dir::l) && (lastDir == Dir::r || lastDir == Dir::l))
+      return;
+    if ((val == Dir::u || val == Dir::d) && (lastDir == Dir::u || lastDir == Dir::d))
+      return;
+  }
+  else
+  {
+    if ((val == Dir::r || val == Dir::l) && (curDir == Dir::r || curDir == Dir::l))
+      return;
+    if ((val == Dir::u || val == Dir::d) && (curDir == Dir::u || curDir == Dir::d))
+      return;
+  }
   curDir = val;
 }
 

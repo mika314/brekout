@@ -51,7 +51,7 @@ TitleScreen::TitleScreen(int n, sdl::Renderer &r, Audio &audio)
           newScene = std::make_unique<LoadingScreen>(3, r, audio);
         });
       case 8:
-        return world.newObj<Button>(r, LOAD_SPRITE(issue_fixed_4), (ScreenWidth - 446) / 2, (ScreenHeight - 349) / 2, 446, 349, [this, &r, &audio]() {
+        return world.newObj<Button>(r, LOAD_SPRITE(issue_fixed_4), (ScreenWidth - 526) / 2, (ScreenHeight - 352) / 2, 526, 352, [this, &r, &audio]() {
           newScene = std::make_unique<Booting>(5, r, audio);
         });
       case 9:

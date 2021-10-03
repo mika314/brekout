@@ -26,6 +26,8 @@ private:
   std::reference_wrapper<sdl::Renderer> r;
   Canvas canvas;
   uint32_t t0;
+  float time = 0;
+  bool isCrashed = 0;
   sdl::Texture bg;
   std::unique_ptr<Scene> newScene = nullptr;
 };

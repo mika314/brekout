@@ -24,16 +24,39 @@ auto ScoreScreen::loopOnce() -> std::unique_ptr<Scene>
   r.get().setDrawColor(0x00, 0x00, 0x00, 0xff);
   r.get().clear();
   canvas.draw(bg, 0, 0, ScreenWidth, ScreenHeight);
-  world.draw(canvas);
   {
     std::ostringstream st;
     st << "Score: " << score;
     canvas.drawTextHud(st.str(), 0, 0);
   }
+
+  int y = ScreenHeight - 32 * std::min(20.f, time);
+  for (auto line :
+       {"Game Over", "Your score: -4294967296", "", "LD49 Submission", "Theme: Unstable", "", "Thank you for playing my game", "", "-- Mika"})
+  {
+    canvas.drawTextHudC(line, y);
+    y += 64;
+  }
+
+  world.draw(canvas);
+
+  if (time > 20.f && !isCrashed)
+  {
+    if (!isCrashed)
+    {
+      audio.get().PLAY(crash, 1, 0);
+      world.newObj<Button>(r, LOAD_SPRITE(crash), 100, 100, 516, 256, []() {});
+      world.newObj<Button>(r, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this]() { newScene = std::make_unique<TitleScreen>(1, r, audio); });
+      world.newObj<Button>(r, LOAD_SPRITE(close), 130, 255, 155, 18, [this]() { newScene = std::make_unique<TitleScreen>(9, r, audio); });
+    }
+    isCrashed = true;
+  }
+
   canvas.present();
   const auto t1 = SDL_GetTicks();
   const auto dt = 0.001f * (t1 - t0);
   world.tick(dt);
+  time += dt;
   t0 = t1;
   world.housekeeping();
   return std::move(newScene);
