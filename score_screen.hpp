@@ -12,14 +12,14 @@ namespace sdl
   class Renderer;
 }
 
-class GamePlayScreen : public Scene
+class ScoreScreen : public Scene
 {
 public:
-  GamePlayScreen(int n, sdl::Renderer &, Audio &);
+  ScoreScreen(int n, sdl::Renderer &, Audio &);
   auto loopOnce() -> std::unique_ptr<Scene>;
 
 private:
-  int n;
+  int score;
   sdl::EventHandler e;
   World world;
   std::reference_wrapper<Audio> audio;
@@ -27,9 +27,5 @@ private:
   Canvas canvas;
   uint32_t t0;
   sdl::Texture bg;
-  std::reference_wrapper<class Snake> snake;
-  std::vector<std::reference_wrapper<class Fruit>> fruits;
-  int score = 0;
   std::unique_ptr<Scene> newScene = nullptr;
-  bool isCrashed = false;
 };

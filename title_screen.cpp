@@ -44,7 +44,19 @@ TitleScreen::TitleScreen(int n, sdl::Renderer &r, Audio &audio)
         });
       case 6:
         return world.newObj<Button>(r, LOAD_SPRITE(issue_fixed_3), (ScreenWidth - 446) / 2, (ScreenHeight - 349) / 2, 446, 349, [this, &r, &audio]() {
+          newScene = std::make_unique<Booting>(4, r, audio);
+        });
+      case 7:
+        return world.newObj<Button>(r, LOAD_SPRITE(play_button), (ScreenWidth - 200) / 2, 450, 200, 100, [this, &r, &audio]() {
           newScene = std::make_unique<LoadingScreen>(3, r, audio);
+        });
+      case 8:
+        return world.newObj<Button>(r, LOAD_SPRITE(issue_fixed_4), (ScreenWidth - 446) / 2, (ScreenHeight - 349) / 2, 446, 349, [this, &r, &audio]() {
+          newScene = std::make_unique<Booting>(5, r, audio);
+        });
+      case 9:
+        return world.newObj<Button>(r, LOAD_SPRITE(play_button), (ScreenWidth - 200) / 2, 450, 200, 100, [this, &r, &audio]() {
+          newScene = std::make_unique<LoadingScreen>(4, r, audio);
         });
       }
     }()),
@@ -62,11 +74,16 @@ TitleScreen::TitleScreen(int n, sdl::Renderer &r, Audio &audio)
   world.regEvents(e);
   switch (n)
   {
-  case 2:
   case 3:
   case 4: world.newObj<Button>(r, LOAD_SPRITE(ver_b), ScreenWidth - 60, ScreenHeight - 90, 56, 80, []() {}); break;
-  case 5: world.newObj<Button>(r, LOAD_SPRITE(ver_r), ScreenWidth - 60, ScreenHeight - 90, 56, 80, []() {}); break;
-  case 6: world.newObj<Button>(r, LOAD_SPRITE(ver_2), ScreenWidth - 110, ScreenHeight - 90, 106, 80, []() {}); break;
+  case 5:
+  case 6: world.newObj<Button>(r, LOAD_SPRITE(ver_r), ScreenWidth - 60, ScreenHeight - 90, 56, 80, []() {}); break;
+  case 7:
+  case 8: world.newObj<Button>(r, LOAD_SPRITE(ver_2), ScreenWidth - 110, ScreenHeight - 90, 106, 80, []() {}); break;
+  case 9:
+    world.newObj<Button>(r, LOAD_SPRITE(ver_3), ScreenWidth - 110, ScreenHeight - 90, 106, 80, []() {});
+    world.newObj<Button>(r, LOAD_SPRITE(snekout), 0, 0, 1280, 720, []() {});
+    break;
   }
 }
 

@@ -12,6 +12,7 @@
 LoadingScreen::LoadingScreen(int n, sdl::Renderer &r, Audio &audio)
   : n(n), audio(audio), r(r), canvas(r), t0(SDL_GetTicks()), bg(r.get(), LOAD_SPRITE(title_screen))
 {
+  LOG("Loading Screen:", n);
   e.quit = [&done = done](const SDL_QuitEvent &) { done = true; };
   world.regEvents(e);
   switch (n)
@@ -19,6 +20,7 @@ LoadingScreen::LoadingScreen(int n, sdl::Renderer &r, Audio &audio)
   case 1: world.newObj<Button>(r, LOAD_SPRITE(ver_b), ScreenWidth - 60, ScreenHeight - 90, 56, 80, []() {}); break;
   case 2: world.newObj<Button>(r, LOAD_SPRITE(ver_r), ScreenWidth - 60, ScreenHeight - 90, 56, 80, []() {}); break;
   case 3: world.newObj<Button>(r, LOAD_SPRITE(ver_2), ScreenWidth - 110, ScreenHeight - 90, 106, 80, []() {}); break;
+  case 4: world.newObj<Button>(r, LOAD_SPRITE(ver_3), ScreenWidth - 110, ScreenHeight - 90, 106, 80, []() {}); break;
   }
 }
 
@@ -40,8 +42,7 @@ auto LoadingScreen::loopOnce() -> std::unique_ptr<Scene>
     else if (wait < 12)
       canvas.drawRect(0, ScreenHeight - 8, (18 - wait) * ScreenWidth / 9, 8);
     break;
-  case 2:
-  case 3:
+  default:
     if (wait < 5.8)
       canvas.drawRect(0, ScreenHeight - 8, (wait + sin(wait)) * ScreenWidth / 6, 8);
     else if (wait < 9)
@@ -69,11 +70,12 @@ auto LoadingScreen::loopOnce() -> std::unique_ptr<Scene>
       world.newObj<Button>(r, LOAD_SPRITE(close), 130, 255, 155, 18, [this]() { newScene = std::make_unique<TitleScreen>(4, r, audio); });
     }
     break;
-  case 2:
-  case 3:
+  default:
     if (wait > 10)
-      newScene = std::make_unique<GamePlayScreen>(r.get(), audio.get());
+      newScene = std::make_unique<GamePlayScreen>(n - 1, r.get(), audio.get());
     break;
   }
+  if (n == 4)
+    world.newObj<Button>(r, LOAD_SPRITE(snekout), 0, 0, 1280, 720, []() {});
   return std::move(newScene);
 }

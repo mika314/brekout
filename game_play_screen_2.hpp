@@ -12,10 +12,10 @@ namespace sdl
   class Renderer;
 }
 
-class GamePlayScreen : public Scene
+class GamePlayScreen2 : public Scene
 {
 public:
-  GamePlayScreen(int n, sdl::Renderer &, Audio &);
+  GamePlayScreen2(int n, sdl::Renderer &, Audio &);
   auto loopOnce() -> std::unique_ptr<Scene>;
 
 private:

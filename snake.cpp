@@ -3,8 +3,9 @@
 #include "canvas.hpp"
 #include "sprite.hpp"
 
-Snake::Snake(sdl::Renderer &r, Audio &audio)
-  : audio(audio),
+Snake::Snake(int n, sdl::Renderer &r, Audio &audio)
+  : n(n),
+    audio(audio),
     r(r),
     bodyBL(r.get(), LOAD_SPRITE(snake_08)),
     bodyBR(r.get(), LOAD_SPRITE(snake_04)),
@@ -75,12 +76,22 @@ auto Snake::draw(Canvas &c) -> void
 auto Snake::tick(float dt) -> void
 {
   acc += dt;
-  auto speed = 0.36f * (sinf(0.001f * SDL_GetTicks()) + 1.1f);
+  gameTime += dt;
+  const auto speed = [n = n, gameTime = gameTime]() {
+    switch (n)
+    {
+    case 1: return 0.36f * (sinf(0.001f * SDL_GetTicks()) + 1.1f);
+    case 2: return std::max(0.001f, 0.18f - gameTime * 0.005f);
+    case 3:
+    default: return std::max(0.01f, 0.18f - gameTime * 0.001f);
+    }
+  }();
   while (acc > speed)
   {
     acc -= speed;
     snake.push_front(curDir);
-    audio.get().PLAY(tick, 1, 0);
+    if (speed > 0.001f)
+      audio.get().PLAY(tick, .1f, 0);
     if (fruits == 0)
       snake.pop_back();
     else
@@ -93,6 +104,8 @@ auto Snake::tick(float dt) -> void
     headX += dx[static_cast<size_t>(curDir)];
     headY += dy[static_cast<size_t>(curDir)];
   }
+  if (n == 1 && gameTime > 20)
+    headX = -100;
 }
 
 auto Snake::move(Dir val) -> void

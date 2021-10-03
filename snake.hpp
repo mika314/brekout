@@ -9,7 +9,7 @@ enum class Dir { u, l, d, r };
 class Snake : public Obj
 {
 public:
-  Snake(sdl::Renderer &, class Audio &);
+  Snake(int n, sdl::Renderer &, class Audio &);
   auto draw(Canvas &) -> void override;
   auto tick(float dt) -> void override;
   auto move(Dir) -> void;
@@ -17,11 +17,14 @@ public:
 
   int headX = 10;
   int headY = 10;
+
 private:
+  int n;
   std::deque<Dir> snake;
   float acc = 0;
   Dir curDir = Dir::d;
   int fruits = 0;
+  float gameTime = 0.f;
   std::reference_wrapper<class Audio> audio;
   std::reference_wrapper<sdl::Renderer> r;
   sdl::Texture bodyBL;

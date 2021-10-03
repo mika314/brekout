@@ -9,6 +9,7 @@
 #include "issue_fixed.bmp.gen.hpp"
 #include "issue_fixed_2.bmp.gen.hpp"
 #include "issue_fixed_3.bmp.gen.hpp"
+#include "issue_fixed_4.bmp.gen.hpp"
 #include "loading_00.bmp.gen.hpp"
 #include "loading_01.bmp.gen.hpp"
 #include "loading_02.bmp.gen.hpp"
@@ -42,10 +43,12 @@
 #include "snake_12.bmp.gen.hpp"
 #include "snake_13.bmp.gen.hpp"
 #include "snake_14.bmp.gen.hpp"
+#include "snekout.bmp.gen.hpp"
 #include "title_screen.bmp.gen.hpp"
+#include "ver_2.bmp.gen.hpp"
+#include "ver_3.bmp.gen.hpp"
 #include "ver_b.bmp.gen.hpp"
 #include "ver_r.bmp.gen.hpp"
-#include "ver_2.bmp.gen.hpp"
 
 auto loadSprite(unsigned char *buf, unsigned len) -> SDL_Surface *
 {

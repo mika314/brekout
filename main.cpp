@@ -1,7 +1,8 @@
 #include "audio.hpp"
-#include "consts.hpp"
 #include "booting.hpp"
+#include "consts.hpp"
 #include "game_play_screen.hpp"
+#include "title_screen.hpp"
 #include <sdlpp/sdlpp.hpp>
 
 #ifdef __EMSCRIPTEN__
@@ -19,7 +20,7 @@ int main()
   sdl::Renderer r(w.get(), -1, 0);
   Audio audio;
 
-  scene = std::make_unique<Booting>(1, r, audio);
+  scene = std::make_unique<TitleScreen>(1, r, audio);
 
 #ifdef __EMSCRIPTEN__
   emscripten_set_main_loop(

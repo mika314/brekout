@@ -11,7 +11,7 @@ Audio::Audio()
       want.freq = 44100;
       want.format = AUDIO_S16;
       want.channels = 2;
-      want.samples = 1024;
+      want.samples = 2048;
       return want;
     }()),
     audio(nullptr, false, &want, &have, 0, [this](Uint8 *stream, int len) {
