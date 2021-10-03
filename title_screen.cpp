@@ -1,7 +1,6 @@
 #include "title_screen.hpp"
 #include "audio.hpp"
-#include "booting_2.hpp"
-#include "booting_3.hpp"
+#include "booting.hpp"
 #include "button.hpp"
 #include "canvas.hpp"
 #include "consts.hpp"
@@ -94,7 +93,7 @@ auto TitleScreen::loopOnce() -> std::unique_ptr<Scene>
       loading->kill();
       audio.get().PLAY(crash, 1, 0);
       world.newObj<Button>(r, LOAD_SPRITE(issue_fixed), (ScreenWidth - 507) / 2, (ScreenHeight - 238) / 2, 507, 238, [this]() {
-        newScene = std::make_unique<Booting2>(r.get(), audio.get());
+        newScene = std::make_unique<Booting>(2, r.get(), audio.get());
       });
     }
     break;
@@ -105,7 +104,7 @@ auto TitleScreen::loopOnce() -> std::unique_ptr<Scene>
       loading->kill();
       audio.get().PLAY(crash, 1, 0);
       world.newObj<Button>(r, LOAD_SPRITE(issue_fixed_2), (ScreenWidth - 507) / 2, (ScreenHeight - 238) / 2, 507, 238, [this]() {
-        newScene = std::make_unique<Booting3>(r.get(), audio.get());
+        newScene = std::make_unique<Booting>(3, r.get(), audio.get());
       });
     }
     break;

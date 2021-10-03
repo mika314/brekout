@@ -15,10 +15,11 @@ namespace sdl
 class Booting : public Scene
 {
 public:
-  Booting(sdl::Renderer &, Audio &);
+  Booting(int n, sdl::Renderer &, Audio &);
   auto loopOnce() -> std::unique_ptr<Scene>;
 
 private:
+  int n;
   sdl::EventHandler e;
   World world;
   std::reference_wrapper<Audio> audio;

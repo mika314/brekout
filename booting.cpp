@@ -8,11 +8,16 @@
 #include "title_screen.hpp"
 #include <log/log.hpp>
 
-Booting::Booting(sdl::Renderer &r, Audio &audio) : audio(audio), r(r), canvas(r), t0(SDL_GetTicks()), bg(r.get(), LOAD_SPRITE(boot_screen))
+Booting::Booting(int n, sdl::Renderer &r, Audio &audio)
+  : n(n), audio(audio), r(r), canvas(r), t0(SDL_GetTicks()), bg(r.get(), LOAD_SPRITE(boot_screen))
 {
   e.quit = [&done = done](const SDL_QuitEvent &) { done = true; };
   world.regEvents(e);
-  audio.PLAY(booting, 0.25f, 0);
+  switch (n)
+  {
+  case 1: audio.PLAY(booting, 0.25f, 0); break;
+  default: audio.PLAY(booting_short, 0.25f, 0); break;
+  }
 }
 
 auto Booting::loopOnce() -> std::unique_ptr<Scene>
@@ -29,9 +34,26 @@ auto Booting::loopOnce() -> std::unique_ptr<Scene>
   wait += dt;
   t0 = t1;
   world.housekeeping();
-  if (wait > 20 && !didShowDialog)
+  switch (n)
   {
-    newScene = std::make_unique<TitleScreen>(1, r.get(), audio.get());
+  case 1:
+    if (wait > 20 && !didShowDialog)
+    {
+      newScene = std::make_unique<TitleScreen>(1, r.get(), audio.get());
+    }
+    break;
+  case 2:
+    if (wait > 5 && !didShowDialog)
+    {
+      newScene = std::make_unique<TitleScreen>(3, r.get(), audio.get());
+    }
+    break;
+  case 3:
+    if (wait > 5 && !didShowDialog)
+    {
+      newScene = std::make_unique<TitleScreen>(5, r.get(), audio.get());
+    }
+    break;
   }
   return std::move(newScene);
 }

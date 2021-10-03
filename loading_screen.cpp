@@ -1,6 +1,5 @@
 #include "loading_screen.hpp"
 #include "audio.hpp"
-#include "booting_2.hpp"
 #include "button.hpp"
 #include "canvas.hpp"
 #include "consts.hpp"
