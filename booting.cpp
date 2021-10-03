@@ -31,7 +31,7 @@ auto Booting::loopOnce() -> std::unique_ptr<Scene>
   world.housekeeping();
   if (wait > 20 && !didShowDialog)
   {
-    newScene = std::make_unique<TitleScreen>(r.get(), audio.get());
+    newScene = std::make_unique<TitleScreen>(1, r.get(), audio.get());
   }
   return std::move(newScene);
 }

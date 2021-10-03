@@ -5,7 +5,7 @@
 #include "consts.hpp"
 #include "loading.hpp"
 #include "sprite.hpp"
-#include "title_screen_5.hpp"
+#include "title_screen.hpp"
 #include <log/log.hpp>
 
 Booting3::Booting3(sdl::Renderer &r, Audio &audio) : audio(audio), r(r), canvas(r), t0(SDL_GetTicks()), bg(r.get(), LOAD_SPRITE(boot_screen))
@@ -31,7 +31,7 @@ auto Booting3::loopOnce() -> std::unique_ptr<Scene>
   world.housekeeping();
   if (wait > 5 && !didShowDialog)
   {
-    newScene = std::make_unique<TitleScreen5>(r.get(), audio.get());
+    newScene = std::make_unique<TitleScreen>(5, r.get(), audio.get());
   }
   return std::move(newScene);
 }

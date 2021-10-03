@@ -7,7 +7,7 @@
 #include "loading.hpp"
 #include "snake.hpp"
 #include "sprite.hpp"
-#include "title_screen_6.hpp"
+#include "title_screen.hpp"
 #include <log/log.hpp>
 
 GamePlayScreen::GamePlayScreen(sdl::Renderer &r, Audio &audio)
@@ -31,8 +31,8 @@ GamePlayScreen::GamePlayScreen(sdl::Renderer &r, Audio &audio)
       {
         world.newObj<Button>(r, LOAD_SPRITE(crash), 100, 100, 516, 256, []() {});
         world.newObj<Button>(
-          r, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this, &r, &audio]() { newScene = std::make_unique<TitleScreen6>(r, audio); });
-        world.newObj<Button>(r, LOAD_SPRITE(close), 130, 255, 155, 18, [this, &r, &audio]() { newScene = std::make_unique<TitleScreen6>(r, audio); });
+          r, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this, &r, &audio]() { newScene = std::make_unique<TitleScreen>(6, r, audio); });
+        world.newObj<Button>(r, LOAD_SPRITE(close), 130, 255, 155, 18, [this, &r, &audio]() { newScene = std::make_unique<TitleScreen>(6, r, audio); });
       }
       isCrashed = true;
       break;
@@ -76,8 +76,8 @@ auto GamePlayScreen::loopOnce() -> std::unique_ptr<Scene>
     {
       audio.get().PLAY(crash, 1, 0);
       world.newObj<Button>(r, LOAD_SPRITE(crash), 100, 100, 516, 256, []() {});
-      world.newObj<Button>(r, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this]() { newScene = std::make_unique<TitleScreen6>(r, audio); });
-      world.newObj<Button>(r, LOAD_SPRITE(close), 130, 255, 155, 18, [this]() { newScene = std::make_unique<TitleScreen6>(r, audio); });
+      world.newObj<Button>(r, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this]() { newScene = std::make_unique<TitleScreen>(6, r, audio); });
+      world.newObj<Button>(r, LOAD_SPRITE(close), 130, 255, 155, 18, [this]() { newScene = std::make_unique<TitleScreen>(6, r, audio); });
     }
 
     if (rand() % 100 == 0)

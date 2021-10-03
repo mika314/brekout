@@ -7,7 +7,7 @@
 #include "game_play_screen.hpp"
 #include "loading.hpp"
 #include "sprite.hpp"
-#include "title_screen_4.hpp"
+#include "title_screen.hpp"
 #include <log/log.hpp>
 
 LoadingScreen::LoadingScreen(int n, sdl::Renderer &r, Audio &audio)
@@ -66,8 +66,8 @@ auto LoadingScreen::loopOnce() -> std::unique_ptr<Scene>
       didShowDialog = true;
       audio.get().PLAY(crash, 1, 0);
       world.newObj<Button>(r, LOAD_SPRITE(crash), 100, 100, 516, 256, []() {});
-      world.newObj<Button>(r, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this]() { newScene = std::make_unique<TitleScreen4>(r, audio); });
-      world.newObj<Button>(r, LOAD_SPRITE(close), 130, 255, 155, 18, [this]() { newScene = std::make_unique<TitleScreen4>(r, audio); });
+      world.newObj<Button>(r, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this]() { newScene = std::make_unique<TitleScreen>(4, r, audio); });
+      world.newObj<Button>(r, LOAD_SPRITE(close), 130, 255, 155, 18, [this]() { newScene = std::make_unique<TitleScreen>(4, r, audio); });
     }
     break;
   case 2:

@@ -19,7 +19,7 @@ int main()
   sdl::Renderer r(w.get(), -1, 0);
   Audio audio;
 
-  scene = std::make_unique<GamePlayScreen>(r, audio);
+  scene = std::make_unique<Booting>(r, audio);
 
 #ifdef __EMSCRIPTEN__
   emscripten_set_main_loop(
