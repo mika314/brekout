@@ -12,6 +12,8 @@ extern unsigned char sprite_font_bmp[];
 extern unsigned      sprite_font_bmp_len;
 extern unsigned char sprite_play_button_bmp[];
 extern unsigned      sprite_play_button_bmp_len;
+extern unsigned char sprite_play_button_down_bmp[];
+extern unsigned      sprite_play_button_down_bmp_len;
 extern unsigned char sprite_crash_bmp[];
 extern unsigned      sprite_crash_bmp_len;
 extern unsigned char sprite_check_online_bmp[];

@@ -43,12 +43,12 @@ GamePlayScreen::GamePlayScreen(int n, sdl::Renderer &r, Audio &audio)
         audio.PLAY(crash, 1, 0);
         if (!isCrashed)
         {
-          world.newObj<Button>(r, LOAD_SPRITE(crash), 100, 100, 516, 256, []() {});
-          world.newObj<Button>(r, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this, &r, &audio, n]() {
+          world.newObj<Button>(r, audio, LOAD_SPRITE(crash), 100, 100, 516, 256, []() {});
+          world.newObj<Button>(r, audio, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this, &r, &audio, n]() {
             newScene = std::make_unique<TitleScreen>(4 + 2 * n, r, audio);
           });
           world.newObj<Button>(
-            r, LOAD_SPRITE(close), 130, 255, 155, 18, [this, &r, &audio, n]() { newScene = std::make_unique<TitleScreen>(4 + 2 * n, r, audio); });
+            r, audio, LOAD_SPRITE(close), 130, 255, 155, 18, [this, &r, &audio, n]() { newScene = std::make_unique<TitleScreen>(4 + 2 * n, r, audio); });
         }
         isCrashed = true;
       }
@@ -95,10 +95,10 @@ auto GamePlayScreen::loopOnce() -> std::unique_ptr<Scene>
       if (!isCrashed)
       {
         audio.get().PLAY(crash, 1, 0);
-        world.newObj<Button>(r, LOAD_SPRITE(crash), 100, 100, 516, 256, []() {});
+        world.newObj<Button>(r, audio, LOAD_SPRITE(crash), 100, 100, 516, 256, []() {});
         world.newObj<Button>(
-          r, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this]() { newScene = std::make_unique<TitleScreen>(4 + 2 * n, r, audio); });
-        world.newObj<Button>(r, LOAD_SPRITE(close), 130, 255, 155, 18, [this]() { newScene = std::make_unique<TitleScreen>(4 + 2 * n, r, audio); });
+          r, audio, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this]() { newScene = std::make_unique<TitleScreen>(4 + 2 * n, r, audio); });
+        world.newObj<Button>(r, audio, LOAD_SPRITE(close), 130, 255, 155, 18, [this]() { newScene = std::make_unique<TitleScreen>(4 + 2 * n, r, audio); });
       }
 
       if (rand() % 100 == 0)

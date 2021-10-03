@@ -29,6 +29,7 @@
 #include "loading_16.bmp.gen.hpp"
 #include "loading_17.bmp.gen.hpp"
 #include "play_button.bmp.gen.hpp"
+#include "play_button_down.bmp.gen.hpp"
 #include "snake_01.bmp.gen.hpp"
 #include "snake_02.bmp.gen.hpp"
 #include "snake_03.bmp.gen.hpp"

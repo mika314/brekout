@@ -17,10 +17,10 @@ LoadingScreen::LoadingScreen(int n, sdl::Renderer &r, Audio &audio)
   world.regEvents(e);
   switch (n)
   {
-  case 1: world.newObj<Button>(r, LOAD_SPRITE(ver_b), ScreenWidth - 60, ScreenHeight - 90, 56, 80, []() {}); break;
-  case 2: world.newObj<Button>(r, LOAD_SPRITE(ver_r), ScreenWidth - 60, ScreenHeight - 90, 56, 80, []() {}); break;
-  case 3: world.newObj<Button>(r, LOAD_SPRITE(ver_2), ScreenWidth - 110, ScreenHeight - 90, 106, 80, []() {}); break;
-  case 4: world.newObj<Button>(r, LOAD_SPRITE(ver_3), ScreenWidth - 110, ScreenHeight - 90, 106, 80, []() {}); break;
+  case 1: world.newObj<Button>(r, audio, LOAD_SPRITE(ver_b), ScreenWidth - 60, ScreenHeight - 90, 56, 80, []() {}); break;
+  case 2: world.newObj<Button>(r, audio, LOAD_SPRITE(ver_r), ScreenWidth - 60, ScreenHeight - 90, 56, 80, []() {}); break;
+  case 3: world.newObj<Button>(r, audio, LOAD_SPRITE(ver_2), ScreenWidth - 110, ScreenHeight - 90, 106, 80, []() {}); break;
+  case 4: world.newObj<Button>(r, audio, LOAD_SPRITE(ver_3), ScreenWidth - 110, ScreenHeight - 90, 106, 80, []() {}); break;
   }
 }
 
@@ -65,9 +65,9 @@ auto LoadingScreen::loopOnce() -> std::unique_ptr<Scene>
     {
       didShowDialog = true;
       audio.get().PLAY(crash, 1, 0);
-      world.newObj<Button>(r, LOAD_SPRITE(crash), 100, 100, 516, 256, []() {});
-      world.newObj<Button>(r, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this]() { newScene = std::make_unique<TitleScreen>(4, r, audio); });
-      world.newObj<Button>(r, LOAD_SPRITE(close), 130, 255, 155, 18, [this]() { newScene = std::make_unique<TitleScreen>(4, r, audio); });
+      world.newObj<Button>(r, audio, LOAD_SPRITE(crash), 100, 100, 516, 256, []() {});
+      world.newObj<Button>(r, audio, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this]() { newScene = std::make_unique<TitleScreen>(4, r, audio); });
+      world.newObj<Button>(r, audio, LOAD_SPRITE(close), 130, 255, 155, 18, [this]() { newScene = std::make_unique<TitleScreen>(4, r, audio); });
     }
     break;
   default:

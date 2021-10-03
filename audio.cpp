@@ -4,6 +4,7 @@
 #include "booting_short.wav.gen.hpp"
 #include "crash.wav.gen.hpp"
 #include "tick.wav.gen.hpp"
+#include "click.wav.gen.hpp"
 
 Audio::Audio()
   : want([]() {
