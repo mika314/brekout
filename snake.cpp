@@ -94,8 +94,13 @@ auto Snake::tick(float dt) -> void
   while (acc > speed)
   {
     acc -= speed;
+    if (!isKeyProcessing && !keyboardBuf.empty())
+    {
+      move(keyboardBuf.front());
+      keyboardBuf.pop_front();
+    }
     snake.push_front(curDir);
-    lastDir = curDir;
+    isKeyProcessing = false;
     if (speed > 0.001f)
       audio.get().PLAY(tick, .02f, 0);
     if (fruits == 0)
@@ -110,26 +115,23 @@ auto Snake::tick(float dt) -> void
     headX += dx[static_cast<size_t>(curDir)];
     headY += dy[static_cast<size_t>(curDir)];
   }
+
   if (n == 1 && gameTime > 20)
     headX = -100;
 }
 
 auto Snake::move(Dir val) -> void
 {
-  if (n >= 3)
+  if ((val == Dir::r || val == Dir::l) && (curDir == Dir::r || curDir == Dir::l))
+    return;
+  if ((val == Dir::u || val == Dir::d) && (curDir == Dir::u || curDir == Dir::d))
+    return;
+  if (isKeyProcessing)
   {
-    if ((val == Dir::r || val == Dir::l) && (lastDir == Dir::r || lastDir == Dir::l))
-      return;
-    if ((val == Dir::u || val == Dir::d) && (lastDir == Dir::u || lastDir == Dir::d))
-      return;
+    keyboardBuf.push_back(val);
+    return;
   }
-  else
-  {
-    if ((val == Dir::r || val == Dir::l) && (curDir == Dir::r || curDir == Dir::l))
-      return;
-    if ((val == Dir::u || val == Dir::d) && (curDir == Dir::u || curDir == Dir::d))
-      return;
-  }
+  isKeyProcessing = true;
   curDir = val;
 }
 
