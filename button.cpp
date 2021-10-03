@@ -36,6 +36,8 @@ auto Button::mouseUp(Btn btn, int ax, int ay) -> void
     return;
   if (ay > y + h)
     return;
+  if (!onClick)
+    return;
   audio.get().PLAY(click, 1, 0);
   onClick();
 }

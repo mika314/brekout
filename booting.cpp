@@ -17,8 +17,8 @@ Booting::Booting(int n, sdl::Renderer &r, Audio &audio)
   switch (n)
   {
   case 1:
-  case 2: audio.PLAY(booting, 0.25f, 0); break;
-  default: audio.PLAY(booting_short, 0.25f, 0); break;
+  case 2: audio.PLAY(booting, 0.25f, -0.25f); break;
+  default: audio.PLAY(booting_short, 0.25f, -0.25f); break;
   }
 }
 

@@ -11,8 +11,8 @@ namespace sdl
 class Button : public Obj
 {
 public:
-  Button(sdl::Renderer &, class Audio &, SDL_Surface *, int x, int y, int w, int h, std::function<auto()->void> onClick);
-  Button(sdl::Renderer &, class Audio &, SDL_Surface *, SDL_Surface *, int x, int y, int w, int h, std::function<auto()->void> onClick);
+  Button(sdl::Renderer &, class Audio &, SDL_Surface *, int x, int y, int w, int h, std::function<auto()->void> onClick = nullptr);
+  Button(sdl::Renderer &, class Audio &, SDL_Surface *, SDL_Surface *, int x, int y, int w, int h, std::function<auto()->void> onClick = nullptr);
   auto draw(class Canvas &) -> void override;
   auto tick(float dt) -> void override;
   auto mouseUp(Btn, int x, int y) -> void override;

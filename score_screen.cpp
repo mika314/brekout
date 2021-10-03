@@ -45,9 +45,13 @@ auto ScoreScreen::loopOnce() -> std::unique_ptr<Scene>
     if (!isCrashed)
     {
       audio.get().PLAY(crash, 1, 0);
-      world.newObj<Button>(r, audio, LOAD_SPRITE(crash), 100, 100, 516, 256, []() {});
-      world.newObj<Button>(r, audio, LOAD_SPRITE(check_online), 130, 230, 371, 18, [this]() { newScene = std::make_unique<TitleScreen>(1, r, audio); });
-      world.newObj<Button>(r, audio, LOAD_SPRITE(close), 130, 255, 155, 18, [this]() { newScene = std::make_unique<TitleScreen>(9, r, audio); });
+      world.newObj<Button>(r, audio, LOAD_SPRITE(crash), 100, 100, 516, 256);
+      world.newObj<Button>(r, audio, LOAD_SPRITE(check_online), LOAD_SPRITE(check_online_down), 130, 230, 371, 18, [this]() {
+        newScene = std::make_unique<TitleScreen>(1, r, audio);
+      });
+      world.newObj<Button>(r, audio, LOAD_SPRITE(close), LOAD_SPRITE(close_down), 130, 255, 155, 18, [this]() {
+        newScene = std::make_unique<TitleScreen>(9, r, audio);
+      });
     }
     isCrashed = true;
   }
