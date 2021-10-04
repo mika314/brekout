@@ -12,6 +12,7 @@ Booting::Booting(int n, sdl::Renderer &r, Audio &audio)
   : n(n), audio(audio), r(r), canvas(r), t0(SDL_GetTicks()), bg(r.get(), LOAD_SPRITE(boot_screen))
 {
   LOG("Booting:", n);
+  audio.stopAll();
   e.quit = [&done = done](const SDL_QuitEvent &) { done = true; };
   world.regEvents(e);
   switch (n)

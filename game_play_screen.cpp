@@ -15,6 +15,7 @@ GamePlayScreen::GamePlayScreen(int n, sdl::Renderer &r, Audio &audio)
   : n(n), audio(audio), r(r), canvas(r), t0(SDL_GetTicks()), bg(r.get(), LOAD_SPRITE(game_field)), snake(world.newObj<Snake>(n, r, audio))
 {
   LOG("Game Play:", n);
+  audio.stopAll();
   e.quit = [&done = done](const SDL_QuitEvent &) { done = true; };
   e.keyDown = [&snake = snake, this, &audio = audio, &r = r, n](const SDL_KeyboardEvent &e) {
     switch (e.keysym.sym)
@@ -97,10 +98,12 @@ auto GamePlayScreen::loopOnce() -> std::unique_ptr<Scene>
       {
         audio.get().PLAY(crash, 1, 0);
         world.newObj<Button>(r, audio, LOAD_SPRITE(crash), 100, 100, 516, 256);
-        world.newObj<Button>(
-          r, audio, LOAD_SPRITE(check_online), LOAD_SPRITE(check_online_down), 130, 230, 371, 18, [this]() { newScene = std::make_unique<TitleScreen>(4 + 2 * n, r, audio); });
-        world.newObj<Button>(
-          r, audio, LOAD_SPRITE(close), LOAD_SPRITE(close_down), 130, 255, 155, 18, [this]() { newScene = std::make_unique<TitleScreen>(4 + 2 * n, r, audio); });
+        world.newObj<Button>(r, audio, LOAD_SPRITE(check_online), LOAD_SPRITE(check_online_down), 130, 230, 371, 18, [this]() {
+          newScene = std::make_unique<TitleScreen>(4 + 2 * n, r, audio);
+        });
+        world.newObj<Button>(r, audio, LOAD_SPRITE(close), LOAD_SPRITE(close_down), 130, 255, 155, 18, [this]() {
+          newScene = std::make_unique<TitleScreen>(4 + 2 * n, r, audio);
+        });
       }
 
       if (rand() % 100 == 0)

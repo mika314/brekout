@@ -19,6 +19,7 @@ public:
   Audio();
   ~Audio();
   auto play(unsigned char *, unsigned, float vol, float pan) -> void;
+  auto stopAll() -> void;
 
 private:
   SDL_AudioSpec want;
@@ -38,5 +39,6 @@ DEF_SND(booting_short);
 DEF_SND(tick);
 DEF_SND(bite);
 DEF_SND(click);
+DEF_SND(intro);
 
 #undef DEF_SND

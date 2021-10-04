@@ -120,3 +120,5 @@ extern unsigned char sprite_restart_bmp[];
 extern unsigned      sprite_restart_bmp_len;
 extern unsigned char sprite_restart_down_bmp[];
 extern unsigned      sprite_restart_down_bmp_len;
+extern unsigned char sprite_last_crash_bmp[];
+extern unsigned      sprite_last_crash_bmp_len;

@@ -2,9 +2,10 @@
 #include "bite.wav.gen.hpp"
 #include "booting.wav.gen.hpp"
 #include "booting_short.wav.gen.hpp"
-#include "crash.wav.gen.hpp"
-#include "tick.wav.gen.hpp"
 #include "click.wav.gen.hpp"
+#include "crash.wav.gen.hpp"
+#include "intro.wav.gen.hpp"
+#include "tick.wav.gen.hpp"
 
 Audio::Audio()
   : want([]() {
@@ -50,10 +51,22 @@ auto Audio::play(unsigned char *buf, unsigned len, float vol, float pan) -> void
     playBuf.resize(sz);
   auto in = reinterpret_cast<int16_t *>(it->second.buf);
   auto wavLen = it->second.len;
-  for (auto i = 0U; wavLen > 0U; wavLen -= sizeof(int16_t), ++in, ++i)
+  switch (it->second.spec.channels)
   {
-    playBuf[i + static_cast<int>(pan > 0 ? std::abs(pan) * 26 : 0)][0] += (1 - pan) * vol * *in;
-    playBuf[i + static_cast<int>(pan < 0 ? std::abs(pan) * 26 : 0)][1] += (pan + 1) * vol * *in;
+  case 1:
+    for (auto i = 0U; wavLen > 0U; wavLen -= sizeof(int16_t), ++in, ++i)
+    {
+      playBuf[i + static_cast<int>(pan > 0 ? std::abs(pan) * 26 : 0)][0] += (1 - pan) * vol * *in;
+      playBuf[i + static_cast<int>(pan < 0 ? std::abs(pan) * 26 : 0)][1] += (pan + 1) * vol * *in;
+    }
+    break;
+  case 2:
+    for (auto i = 0U; wavLen > 0U; wavLen -= 2 * sizeof(int16_t), in += 2, ++i)
+    {
+      playBuf[i + static_cast<int>(pan > 0 ? std::abs(pan) * 26 : 0)][0] += (1 - pan) * vol * in[0];
+      playBuf[i + static_cast<int>(pan < 0 ? std::abs(pan) * 26 : 0)][1] += (pan + 1) * vol * in[1];
+    }
+    break;
   }
   audio.unlock();
 }
@@ -62,4 +75,11 @@ Audio::~Audio()
 {
   for (auto &wav : cache)
     SDL_FreeWAV(wav.second.buf);
+}
+
+auto Audio::stopAll() -> void
+{
+  audio.lock();
+  playBuf.resize(0);
+  audio.unlock();
 }

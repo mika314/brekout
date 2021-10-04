@@ -41,3 +41,4 @@
 *.wasm
 *.js
 *.html
+auto-backups/

@@ -92,6 +92,31 @@ TitleScreen::TitleScreen(int n, sdl::Renderer &r, Audio &audio)
 {
   LOG("Title Screen:", n);
   e.quit = [&done = done](const SDL_QuitEvent &) { done = true; };
+  e.keyDown = [this, &audio = audio, &r = r](const SDL_KeyboardEvent &e) {
+    switch (e.keysym.sym)
+    {
+    case SDLK_F1:
+      audio.stopAll();
+      newScene = std::make_unique<TitleScreen>(1, r, audio);
+      break;
+    case SDLK_F2:
+      audio.stopAll();
+      newScene = std::make_unique<TitleScreen>(3, r, audio);
+      break;
+    case SDLK_F3:
+      audio.stopAll();
+      newScene = std::make_unique<TitleScreen>(5, r, audio);
+      break;
+    case SDLK_F4:
+      audio.stopAll();
+      newScene = std::make_unique<TitleScreen>(7, r, audio);
+      break;
+    case SDLK_F5:
+      audio.stopAll();
+      newScene = std::make_unique<TitleScreen>(9, r, audio);
+      break;
+    }
+  };
   world.regEvents(e);
   switch (n)
   {
@@ -103,6 +128,8 @@ TitleScreen::TitleScreen(int n, sdl::Renderer &r, Audio &audio)
   case 8: world.newObj<Button>(r, audio, LOAD_SPRITE(ver_2), ScreenWidth - 110, ScreenHeight - 90, 106, 80); break;
   case 9: world.newObj<Button>(r, audio, LOAD_SPRITE(ver_3), ScreenWidth - 110, ScreenHeight - 90, 106, 80); break;
   }
+  if (n % 2 == 1)
+    audio.PLAY(intro, 0.2, 0);
 }
 
 auto TitleScreen::loopOnce() -> std::unique_ptr<Scene>

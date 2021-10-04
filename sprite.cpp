@@ -12,6 +12,7 @@
 #include "issue_fixed_2.bmp.gen.hpp"
 #include "issue_fixed_3.bmp.gen.hpp"
 #include "issue_fixed_4.bmp.gen.hpp"
+#include "last_crash.bmp.gen.hpp"
 #include "loading_00.bmp.gen.hpp"
 #include "loading_01.bmp.gen.hpp"
 #include "loading_02.bmp.gen.hpp"
